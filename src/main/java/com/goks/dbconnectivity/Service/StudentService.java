@@ -1,5 +1,6 @@
 package com.goks.dbconnectivity.Service;
 
+import com.goks.dbconnectivity.Exception.StudentNotFoundException;
 import com.goks.dbconnectivity.Model.Student;
 import com.goks.dbconnectivity.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class StudentService {
     }
 
     public Student getById(Long id) {
-        return repo.findById(id).orElseThrow();
+        return repo.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
     }
 
     public void delete(Long id) {
